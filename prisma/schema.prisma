@@ -12,7 +12,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  // url property removed for Prisma v7 - connection now handled in prisma.config.ts
 }
 
 enum TradeSide {

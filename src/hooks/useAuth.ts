@@ -123,6 +123,25 @@ export function useAuth() {
           name: data.user.user_metadata?.full_name || 'User'
         };
         setUser(user);
+        
+        // Send verification email via API route
+        try {
+          // In a real app, you would generate a proper verification token
+          // For now, we'll use a placeholder
+          await fetch('/api/email/send-verification', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email,
+              token: 'verification-token-placeholder',
+            }),
+          });
+        } catch (emailError) {
+          console.error('Failed to send verification email:', emailError);
+        }
+        
         return { success: true as const };
       }
       

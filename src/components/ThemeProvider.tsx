@@ -1,40 +1,25 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 
-type Theme = "light" | "dark";
-
-const ThemeContext = createContext<{ theme: Theme; setTheme: (t: Theme) => void } | null>(
+const ThemeContext = createContext<{ theme: string; setTheme: (t: string) => void } | null>(
   null
 );
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
-
-  useEffect(() => {
-    const prefersDark =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setTheme(prefersDark ? "dark" : "light");
-  }, []);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-  }, [theme]);
+  // Simplified provider for Bitpanda Pro design
+  const theme = "light";
+  const setTheme = () => {}; // No-op since we're not implementing theme switching
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
   );
 }
 
 export function useTheme() {
-  const ctx = ThemeContext;
+  const ctx = useContext(ThemeContext);
   if (!ctx) throw new Error("useTheme must be used within ThemeProvider");
-  return useContext(ctx);
+  return ctx;
 }

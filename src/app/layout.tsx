@@ -1,12 +1,43 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Sidebar from "@/components/Sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
+const inter = Inter({ subsets: ["latin"] });
+
 export const metadata: Metadata = {
-  title: "NewBit Crypto Dashboard",
-  description: "Minimal scaffold for a crypto dashboard using Next.js App Router",
+  title: "Bitpanda - Start investing today",
+  description: "Trade in minutes from only €1. Your No.1 European broker for stocks, crypto, indices, ETFs and precious metals. Trade 24/7. Fee-free on all deposits.",
+  keywords: "Bitpanda, cryptocurrency, crypto, trading, invest, stocks, ETFs, precious metals, bitcoin, ethereum",
+  authors: [{ name: "Bitpanda" }],
+  creator: "Bitpanda",
+  publisher: "Bitpanda",
+  robots: "index, follow",
+  referrer: "origin",
+  alternates: {
+    canonical: "https://www.bitpanda.com/en"
+  },
+  openGraph: {
+    type: "website",
+    title: "Bitpanda - Start investing today",
+    description: "Trade in minutes from only €1. Your No.1 European broker for stocks, crypto, indices, ETFs and precious metals. Trade 24/7. Fee-free on all deposits.",
+    url: "https://www.bitpanda.com/en",
+    siteName: "Bitpanda",
+    images: [
+      {
+        url: "https://cdn.bitpanda.com/media/og-images-open-graph/bitpanda-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Bitpanda - Start investing today"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary",
+    site: "@Bitpanda_global",
+    title: "Bitpanda - Start investing today",
+    description: "Trade in minutes from only €1. Your No.1 European broker for stocks, crypto, indices, ETFs and precious metals. Trade 24/7. Fee-free on all deposits."
+  }
 };
 
 export default function RootLayout({
@@ -15,16 +46,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.className}`}>
       <body className="antialiased">
         <ThemeProvider>
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <div className="flex flex-1">
-              <Sidebar />
-              <main className="flex-1 p-4">{children}</main>
-            </div>
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>

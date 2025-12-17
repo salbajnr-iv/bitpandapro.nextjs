@@ -1,239 +1,202 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { 
-  TrendingUp, 
-  Shield, 
-  Zap, 
-  Users, 
-  BarChart3, 
-  Smartphone,
-  ChevronRight,
-  Star,
-  Play,
-  CheckCircle,
-  Globe,
-  Lock,
-  Award,
-  ArrowRight,
-  DollarSign,
-  TrendingDown,
-  Activity,
-  PieChart,
-  AlertCircle,
-  Wallet,
-  Timer,
-  Eye,
-  Coins,
-  Rocket,
-  Cpu,
-  Database
-} from "lucide-react";
-import { getCryptoLogo } from "@/components/CryptoLogos";
-import { useAuth } from "@/hooks/useAuth";
+import Image from "next/image";
+import BitpandaNavbar from "@/components/BitpandaNavbar";
+import CryptoTicker from "@/components/CryptoTicker";
 
+// Crypto data
 const topCryptos = [
-  { symbol: "BTC", name: "Bitcoin", price: 45234.56, change: 2.34, volume: "28.5B" },
-  { symbol: "ETH", name: "Ethereum", price: 2876.43, change: -1.23, volume: "12.8B" },
-  { symbol: "BNB", name: "BNB", price: 298.76, change: 3.45, volume: "2.1B" },
-  { symbol: "ADA", name: "Cardano", price: 0.4521, change: 1.87, volume: "890M" },
-  { symbol: "SOL", name: "Solana", price: 98.32, change: 4.12, volume: "1.2B" },
-  { symbol: "XRP", name: "XRP", price: 0.6234, change: -0.45, volume: "1.8B" }
+  { symbol: "BTC", name: "Bitcoin", price: "€45,234.56", change: "+2.34%", volume: "€28.5B" },
+  { symbol: "ETH", name: "Ethereum", price: "€2,876.43", change: "-1.23%", volume: "€12.8B" },
+  { symbol: "BNB", name: "BNB", price: "€298.76", change: "+3.45%", volume: "€2.1B" },
+  { symbol: "ADA", name: "Cardano", price: "€0.4521", change: "+1.87%", volume: "€890M" },
+  { symbol: "SOL", name: "Solana", price: "€98.32", change: "+4.12%", volume: "€1.2B" },
+  { symbol: "XRP", name: "XRP", price: "€0.6234", change: "-0.45%", volume: "€1.8B" }
 ];
 
-const trustIndicators = [
-  {
-    icon: Shield,
-    title: "Regulated",
-    description: "Austria based and European regulated crypto & securities broker platform",
-    link: "/security",
-    linkLabel: "Read more"
-  },
-  {
-    icon: Lock,
-    title: "Safe and secure",
-    description: "Funds secured in offline wallets. Fully compliant with European data, IT and money laundering standards.",
-    link: "/security",
-    linkLabel: "Read more"
-  },
-  {
-    icon: Award,
-    title: "Trusted",
-    description: "7+ million happy users. Excellent Trustpilot rating.",
-    link: "#",
-    linkLabel: "Read reviews"
-  }
-];
-
-const steps = [
-  {
-    number: "01",
-    title: "Register",
-    description: "Sign up to create your free Bitpanda account.",
-    image: "https://a.storyblok.com/f/176646/840x1080/4e498da1d7/website_homepage_register_en.png",
-    alt: "Smartphone displaying Bitpanda app page with a woman holding a phone, promoting zero deposit fees and secure transactions."
-  },
-  {
-    number: "02",
-    title: "Verify",
-    description: "Verify your identity with one of our trusted verification partners.",
-    image: "https://a.storyblok.com/f/176646/840x1080/20149b912b/website_homepage_verify_en.png",
-    alt: "Smartphone screen displaying a video selfie recording interface with a countdown timer and a stop button."
-  },
-  {
-    number: "03",
-    title: "Deposit",
-    description: "Deposit your funds securely through popular options.",
-    image: "https://a.storyblok.com/f/176646/840x1080/af2f5ef73e/website_homepage_deposit_en.png",
-    alt: "Smartphone screen displaying a list of free payment methods: Apple Pay, PayPal, Mastercard, Visa, Online transfer, and Bank transfer."
-  },
-  {
-    number: "04",
-    title: "Trade",
-    description: "Buy, sell and swap digital assets 24/7.",
-    image: "https://a.storyblok.com/f/176646/840x1080/ffa905c022/website_homepage_trade_en.png",
-    alt: "Smartphone displaying a Bitcoin trading app with price chart, current value at 102,326.25€, and options to buy, swap, or sell."
-  }
-];
-
-const investmentCards = [
+// Investment options
+const investmentOptions = [
   {
     title: "Cryptocurrencies",
     description: "Buy, sell, and swap the cryptocurrencies you want anytime, anywhere.",
     image: "https://a.storyblok.com/f/176646/960x600/6795a4c32d/website_homepage_cryptocurrencies.png",
-    alt: "Hand holding a clear coin with a Bitcoin symbol, against a transparent background.",
-    link: "/cryptocurrencies"
+    link: "/crypto"
   },
   {
     title: "Stocks*",
     description: "Invest in fractions of your favourite companies without buying a full share.",
     image: "https://a.storyblok.com/f/176646/960x600/cc80628f6b/website_homepage_stocks.png",
-    alt: "A row of metallic dominoes with various brand logos, including Apple, arranged in a cascading pattern against a white background.",
     link: "/stocks"
   },
   {
     title: "ETFs*",
     description: "Invest in fractions of your favourite ETFs* without buying a full share.",
     image: "https://a.storyblok.com/f/176646/960x600/bc62fd7985/website_homepage_etfs.png",
-    alt: "A transparent, cylindrical plastic object with a cross-shaped divider inside, viewed from an angle.",
     link: "/etfs"
   },
   {
     title: "Commodities*",
     description: "Fortify your portfolio with commodities* and shield it against inflation.",
     image: "https://a.storyblok.com/f/176646/960x600/ff72d39829/website_homepage_commodities.png",
-    alt: "Two white bags with gold leaf and coffee bean designs stand next to a dark green barrel.",
     link: "/commodities"
   },
   {
     title: "Crypto Indices",
     description: "Auto-invest in the whole crypto market with a single click.",
     image: "https://a.storyblok.com/f/176646/960x600/b971c0ccf7/website_homepage_crypto-indices.png",
-    alt: "Transparent petri dishes labeled 'Fi,' 'Infra,' and 'BCI25,' stacked and slightly tilted against a white background.",
-    link: "/crypto-indices"
+    link: "/indices"
   },
   {
     title: "Precious Metals",
     description: "Diversify your portfolio by investing in physically-backed precious metals.",
     image: "https://a.storyblok.com/f/176646/960x600/5c79402c90/website_homepage_metals.png",
-    alt: "Several metallic rectangular boxes in gold and silver shades are arranged in a dynamic, tilted formation against a neutral background.",
     link: "/metals"
   }
 ];
 
-export default function Home() {
-  const { user } = useAuth();
+// Steps data
+const steps = [
+  {
+    number: "01",
+    title: "Register",
+    description: "Sign up to create your free Bitpanda account.",
+    image: "https://a.storyblok.com/f/176646/840x1080/4e498da1d7/website_homepage_register_en.png"
+  },
+  {
+    number: "02",
+    title: "Verify",
+    description: "Verify your identity with one of our trusted verification partners.",
+    image: "https://a.storyblok.com/f/176646/840x1080/20149b912b/website_homepage_verify_en.png"
+  },
+  {
+    number: "03",
+    title: "Deposit",
+    description: "Deposit your funds securely through popular options.",
+    image: "https://a.storyblok.com/f/176646/840x1080/af2f5ef73e/website_homepage_deposit_en.png"
+  },
+  {
+    number: "04",
+    title: "Trade",
+    description: "Buy, sell and swap digital assets 24/7.",
+    image: "https://a.storyblok.com/f/176646/840x1080/ffa905c022/website_homepage_trade_en.png"
+  }
+];
 
+export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-inter">
+    <div className="min-h-screen bg-white">
+      {/* Navbar */}
+      <BitpandaNavbar />
+      
+      {/* Crypto Ticker */}
+      <CryptoTicker />
+      
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-green-600 to-green-800 pt-20 sm:pt-24 pb-16 sm:pb-20 text-white overflow-hidden">
+      <section className="relative bg-gradient-to-br from-green-800 to-green-900 pt-20 pb-16 text-white overflow-hidden">
         <div className="absolute inset-0 bg-[#103e36]"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+        <div className="bp-container relative">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight uppercase text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Fast-track your financial freedom.
               </h1>
-              <p className="text-lg sm:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0">
-                Join over 7 million people investing in 650+ cryptos and 3,000+ digital assets with BitpandaPro.
+              <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl">
+                Join over 7 million people investing in 650+ cryptos and 3,000+ digital assets with Bitpanda Pro.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                <Button size="lg" className="bg-white text-green-600 hover:bg-gray-100 font-medium">
-                  <Link href="/auth">
-                    Start investing
-                  </Link>
-                </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Link href="/auth/register" className="bp-button bp-button-primary bp-button-lg">
+                  Start investing
+                </Link>
               </div>
             </div>
-            <div className="flex justify-center lg:justify-end mt-8 lg:mt-0">
-              <Image 
-                src="/herosection.png" 
-                alt="Man in a gray suit with a striped shirt, sitting and holding a phone, looking to the side, with a green background." 
-                width={500}
-                height={630}
-                className="max-w-xs sm:max-w-md w-full hover:scale-105 transition-transform duration-500"
-                priority
-              />
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-md">
+                <Image 
+                  src="/herosection.png" 
+                  alt="Man in a gray suit with a striped shirt, sitting and holding a phone, looking to the side, with a green background." 
+                  width={500}
+                  height={630}
+                  className="w-full h-auto"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Trust Indicators */}
-      <section className="py-20 bg-green-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 bg-green-800 text-white">
+        <div className="bp-container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {trustIndicators.map((indicator, index) => {
-              const Icon = indicator.icon;
-              return (
-                <div key={index} className="text-center">
-                  <div className="w-12 h-12 mx-auto mb-4 text-white">
-                    <Icon className="w-full h-full" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{indicator.title}</h3>
-                  <p className="text-white/90 mb-4">{indicator.description}</p>
-                  <Button variant="link" className="text-white underline">
-                    <Link href={indicator.link}>{indicator.linkLabel}</Link>
-                  </Button>
-                </div>
-              );
-            })}
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Regulated</h3>
+              <p className="text-white/90 mb-4">Austria based and European regulated crypto & securities broker platform</p>
+              <Link href="/security" className="text-white underline font-medium">Read more</Link>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Safe and secure</h3>
+              <p className="text-white/90 mb-4">Funds secured in offline wallets. Fully compliant with European data, IT and money laundering standards.</p>
+              <Link href="/security" className="text-white underline font-medium">Read more</Link>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Trusted</h3>
+              <p className="text-white/90 mb-4">7+ million happy users. Excellent Trustpilot rating.</p>
+              <Link href="#" className="text-white underline font-medium">Read reviews</Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* All Your Investments Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-green-600 mb-4 uppercase">
+        <div className="bp-container">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-green-800 mb-4">
               All your investments.
               <br className="hidden sm:block" />
-              <span className="sm:hidden"> </span>All on BitpandaPro.
+              <span className="sm:hidden"> </span>All on Bitpanda Pro.
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {investmentCards.map((card, index) => (
-              <Card key={index} className="bg-gray-50 hover:shadow-lg transition-shadow duration-300 border-0 rounded-xl overflow-hidden">
+            {investmentOptions.map((option, index) => (
+              <div key={index} className="bp-card">
                 <div className="aspect-video bg-gray-100">
                   <Image 
-                    src={card.image} 
-                    alt={card.alt} 
+                    src={option.image} 
+                    alt={option.title} 
                     width={400}
                     height={300}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <CardContent className="p-6">
-                  <CardTitle className="text-xl font-bold text-green-600 mb-2">{card.title}</CardTitle>
-                  <p className="text-gray-600">{card.description}</p>
-                </CardContent>
-              </Card>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-green-800 mb-2">{option.title}</h3>
+                  <p className="text-gray-600 mb-4">{option.description}</p>
+                  <Link href={option.link} className="text-green-800 font-medium flex items-center">
+                    Learn more
+                    <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
           <div className="text-center mt-8">
@@ -241,7 +204,7 @@ export default function Home() {
               Investing in stocks, ETFs and commodities carries risks. Conduct your own research before concluding a transaction.
             </p>
             <p className="text-xs text-gray-500 mt-2">
-              *Stocks and ETFs are the underlying assets of the contracts offered as BitpandaPro Stocks and are brought to you by BitpandaPro Financial Services GmbH. 
+              *Stocks and ETFs are the underlying assets of the contracts offered as Bitpanda Pro Stocks and are brought to you by Bitpanda Pro Financial Services GmbH. 
               More information about the product is available at bitpandapro.com. For more details, consult the prospectus available at bitpandapro.com.
             </p>
           </div>
@@ -250,48 +213,45 @@ export default function Home() {
 
       {/* More Money in Portfolio */}
       <section className="py-20 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-green-600 mb-4 uppercase">
-              More than an investment platform
-            </h2>
-          </div>
-          <Card className="bg-green-600 text-white rounded-lg overflow-hidden">
+        <div className="bp-container">
+          <div className="bp-card bg-green-800 text-white">
             <div className="grid lg:grid-cols-2 gap-0">
-              <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
-                <Badge className="bg-gray-600 text-white mb-4 w-fit">
+              <div className="p-8 lg:p-12 flex flex-col justify-center">
+                <div className="bp-badge bp-badge-green mb-4 w-fit">
                   Invest with zero deposit fees
-                </Badge>
-                <CardTitle className="text-2xl md:text-3xl font-bold mb-4">
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">
                   More money in your portfolio
-                </CardTitle>
+                </h3>
                 <p className="text-white/90 mb-6">
-                  No deposit or withdrawal fees on any payment method for all fiat currencies with BitpandaPro. 
+                  No deposit or withdrawal fees on any payment method for all fiat currencies with Bitpanda Pro. 
                   More opportunities to grow your investments and make impactful decisions.
                 </p>
-                <Button variant="secondary" className="w-fit">
+                <Link href="/fees" className="bp-button bp-button-secondary w-fit">
                   Read more
-                </Button>
-              </CardContent>
-              <div className="bg-gray-100 flex items-center justify-center p-8">
-                <Image 
-                  src="https://a.storyblok.com/f/176646/2063x2126/81da40be44/website_homepage_more-money-in-you-portfolio_en.png" 
-                  alt="Payment options: Apple Pay, PayPal, Mastercard, and Visa, all listed as free."
-                  width={500}
-                  height={500}
-                  className="max-w-full h-auto"
-                />
+                </Link>
+              </div>
+              <div className="bg-white flex items-center justify-center p-8">
+                <div className="relative w-full max-w-xs">
+                  <Image 
+                    src="https://a.storyblok.com/f/176646/2063x2126/81da40be44/website_homepage_more-money-in-you-portfolio_en.png" 
+                    alt="Payment options: Apple Pay, PayPal, Mastercard, and Visa, all listed as free."
+                    width={500}
+                    height={500}
+                    className="w-full h-auto"
+                  />
+                </div>
               </div>
             </div>
-          </Card>
+          </div>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-green-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-green-800 text-white">
+        <div className="bp-container">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 uppercase">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               Get started in minutes
             </h2>
           </div>
@@ -299,17 +259,18 @@ export default function Home() {
             {steps.map((step, index) => (
               <div key={index} className="text-center">
                 <div className="bg-white rounded-lg p-6 mb-6">
-                  <Image 
-                    src={step.image} 
-                    alt={step.alt} 
-                    width={300}
-                    height={400}
-                    className="w-full h-auto max-w-xs mx-auto"
-                  />
+                  <div className="relative w-full aspect-[3/4]">
+                    <Image 
+                      src={step.image} 
+                      alt={step.title} 
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
-                <Badge variant="secondary" className="mb-4 bg-white text-green-600">
+                <div className="bp-badge bp-badge-green mb-4">
                   {step.number}
-                </Badge>
+                </div>
                 <h3 className="text-xl font-bold mb-2">{step.title}</h3>
                 <p className="text-white/90">{step.description}</p>
               </div>
@@ -320,36 +281,34 @@ export default function Home() {
 
       {/* Keep Tabs Section */}
       <section className="py-20 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-green-600 mb-4 uppercase">
+        <div className="bp-container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-green-800 mb-4">
               Keep tabs on your favourite assets
             </h2>
           </div>
-          <div className="space-y-3 sm:space-y-4">
-            {topCryptos.map((crypto, index) => (
-              <Card key={index} className="hover:shadow-md transition-shadow duration-300">
-                <CardContent className="flex items-center justify-between p-4 sm:p-6">
-                  <div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
-                    <img 
-                      src={getCryptoLogo(crypto.symbol)} 
-                      alt={crypto.name} 
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex-shrink-0"
-                    />
-                    <div className="min-w-0 flex-1">
-                      <h3 className="font-bold text-base sm:text-lg truncate">{crypto.name}</h3>
-                      <p className="text-xs sm:text-sm text-gray-500">{crypto.symbol}</p>
+          <div className="bp-card">
+            <div className="divide-y divide-gray-200">
+              {topCryptos.map((crypto, index) => (
+                <div key={index} className="p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="bg-gray-200 border-2 border-dashed rounded-xl w-10 h-10" />
+                      <div>
+                        <h3 className="font-bold text-base sm:text-lg">{crypto.name}</h3>
+                        <p className="text-sm text-gray-500">{crypto.symbol}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <h3 className="font-bold text-base sm:text-lg">{crypto.price}</h3>
+                      <p className={`text-sm ${crypto.change.startsWith('+') ? 'text-green-600' : 'text-red-500'}`}>
+                        {crypto.change}
+                      </p>
                     </div>
                   </div>
-                  <div className="text-right flex-shrink-0">
-                    <h3 className="font-bold text-base sm:text-lg">€{crypto.price.toLocaleString()}</h3>
-                    <p className={`text-xs sm:text-sm ${crypto.change > 0 ? 'text-green-600' : 'text-red-500'}`}>
-                      {crypto.change > 0 ? '+' : ''}{crypto.change}%
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
           <p className="text-center mt-8 text-sm text-gray-500">
             Past performance is not an indication of future performance.
@@ -358,103 +317,115 @@ export default function Home() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-green-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 uppercase">
-            Ready to Start Your Investment Journey?
-          </h2>
-          <p className="text-xl mb-8 text-white/75">
-            Join millions of investors who trust BITPANDA PRO for their financial future
-          </p>
-          <p className="text-xl mb-8 text-white/75">
-            Get started in under 5 minutes • No hidden fees • European regulated • Professional Trading Platform
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-green-600 hover:bg-gray-100">
-              <Link href="/auth">
+      <section className="py-20 bg-green-800 text-white">
+        <div className="bp-container">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+              Ready to Start Your Investment Journey?
+            </h2>
+            <p className="text-xl mb-8 text-white/75">
+              Join millions of investors who trust BITPANDA PRO for their financial future
+            </p>
+            <p className="text-xl mb-8 text-white/75">
+              Get started in under 5 minutes • No hidden fees • European regulated • Professional Trading Platform
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/auth/register" className="bp-button bp-button-primary bp-button-lg">
                 Start Trading Now
               </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-green-600" asChild>
-              <Link href="/tutorials">
-                <Play className="w-5 h-5 mr-2" />
+              <Link href="/tutorials" className="bp-button bp-button-secondary bp-button-lg">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
                 View Tutorials
               </Link>
-            </Button>
+            </div>
+            <p className="text-sm mt-6 text-white/75">
+              Get started in under 5 minutes • No hidden fees • European regulated
+            </p>
           </div>
-          <p className="text-sm mt-6 text-white/75">
-            Get started in under 5 minutes • No hidden fees • European regulated
-          </p>
         </div>
       </section>
 
       {/* Questions Section */}
-      <section className="py-20 bg-green-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-green-800 text-white">
+        <div className="bp-container">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 uppercase">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               Questions? We're here for you
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="bg-green-700 text-white border-0">
-              <CardContent className="p-8 text-center">
-                <div className="w-12 h-12 mx-auto mb-4">
-                  <Users className="w-full h-full" />
+            <div className="bp-card bg-green-900 text-white">
+              <div className="p-8 text-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
                 </div>
-                <CardTitle className="text-xl mb-4">Community</CardTitle>
+                <h3 className="text-xl font-bold mb-4">Community</h3>
                 <p className="mb-4">
                   Join our online community so you can be the first to hear about company news, new products and more.
                 </p>
-                <Button variant="link" className="text-white underline">
-                  Join us
-                </Button>
-              </CardContent>
-            </Card>
-            <Card className="bg-green-700 text-white border-0">
-              <CardContent className="p-8 text-center">
-                <div className="w-12 h-12 mx-auto mb-4">
-                  <Activity className="w-full h-full" />
+                <Link href="#" className="text-white underline font-medium">Join us</Link>
+              </div>
+            </div>
+            <div className="bp-card bg-green-900 text-white">
+              <div className="p-8 text-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
                 </div>
-                <CardTitle className="text-xl mb-4">Contact us</CardTitle>
+                <h3 className="text-xl font-bold mb-4">Contact us</h3>
                 <p className="mb-4">
-                  Our BitpandaPro Helpdesk is filled with in-depth articles, and if you need more help, we are always available to lend a helping hand through our contact form.
+                  Our Bitpanda Pro Helpdesk is filled with in-depth articles, and if you need more help, we are always available to lend a helping hand through our contact form.
                 </p>
-                <Button variant="link" className="text-white underline">
-                  Go to Helpdesk
-                </Button>
-              </CardContent>
-            </Card>
+                <Link href="#" className="text-white underline font-medium">Go to Helpdesk</Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="bg-black text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bp-container">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             <div className="col-span-2">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">B</span>
+                <div className="w-8 h-8 bg-green-800 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">BP</span>
                 </div>
                 <span className="text-2xl font-bold text-white uppercase">BITPANDA PRO</span>
               </div>
               <p className="text-gray-300 mb-6 text-sm leading-relaxed">
-                Europe's leading cryptocurrency trading platform. BitpandaPro is regulated, secure, and trusted by millions of users across the continent. Start your investment journey with confidence.
+                Europe's leading cryptocurrency trading platform. Bitpanda Pro is regulated, secure, and trusted by millions of users across the continent. Start your investment journey with confidence.
               </p>
               <div className="flex space-x-4">
-                <Globe className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-                <TrendingUp className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-                <Shield className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-                <Users className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
+                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.09.682-.218.682-.485 0-.236-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.089 2.91.833.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.16 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+                  </svg>
+                </Link>
+                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z"/>
+                  </svg>
+                </Link>
+                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.937 4.937 0 004.604 3.417 9.868 9.868 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                  </svg>
+                </Link>
               </div>
             </div>
 
             <div>
               <h4 className="font-semibold text-white mb-4">Invest</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/cryptocurrencies" className="text-gray-300 hover:text-white">Cryptocurrencies</Link></li>
+                <li><Link href="/crypto" className="text-gray-300 hover:text-white">Cryptocurrencies</Link></li>
                 <li><Link href="/stocks" className="text-gray-300 hover:text-white">Stocks</Link></li>
                 <li><Link href="/etfs" className="text-gray-300 hover:text-white">ETFs</Link></li>
                 <li><Link href="/metals" className="text-gray-300 hover:text-white">Precious Metals</Link></li>
@@ -484,7 +455,7 @@ export default function Home() {
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
             <p className="text-sm text-gray-400">
-              © 2024 BITPANDA PRO. All rights reserved. BitpandaPro GmbH ve grup şirketleri (BitpandaPro) Türkiye'de bankacılık ve finansal hizmetler kanunlarının düzenlediği hiçbir faaliyet için yetkilendirilmemiştir.
+              © 2024 BITPANDA PRO. All rights reserved. Bitpanda Pro GmbH ve grup şirketleri (Bitpanda Pro) Türkiye'de bankacılık ve finansal hizmetler kanunlarının düzenlediği hiçbir faaliyet için yetkilendirilmemiştir.
             </p>
           </div>
         </div>
