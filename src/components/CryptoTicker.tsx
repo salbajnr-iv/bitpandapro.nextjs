@@ -44,7 +44,7 @@ export default function CryptoTicker() {
         const newIndices = prevIndices.map(index => (index + 1) % mockData.length);
         return newIndices;
       });
-    }, 3000); // Change prices every 3 seconds
+    }, 5000); // Change prices every 5 seconds for smoother experience
     
     return () => clearInterval(interval);
   }, []);
@@ -67,11 +67,11 @@ export default function CryptoTicker() {
 
   return (
     <div className="bg-gray-800 py-1 overflow-hidden" style={{ height: '30px' }}>
-      <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center h-full animate-fadeIn">
         {visibleIndices.map((index) => {
           const crypto = prices[index];
           return (
-            <div key={`${crypto.id}-${index}`} className="flex items-center mx-3">
+            <div key={`${crypto.id}-${index}`} className="flex items-center mx-3 animate-slideIn">
               <span className="text-white text-xs font-medium">{crypto.symbol}</span>
               <span className="text-white text-xs mx-1">=</span>
               <span className="text-white text-xs">${crypto.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>

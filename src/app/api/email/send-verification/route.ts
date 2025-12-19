@@ -1,17 +1,35 @@
 import { NextRequest } from 'next/server';
 import { sendVerificationEmail } from '@/lib/email';
+import prisma from '@/lib/prisma';
+import { createVerificationToken } from '@/lib/tokens';
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, token } = await request.json();
+    const { email } = await request.json();
     
-    if (!email || !token) {
+    if (!email) {
       return Response.json(
-        { error: 'Email and token are required' }, 
+        { error: 'Email is required' }, 
         { status: 400 }
       );
     }
     
+    // Find the user by email
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+    
+    if (!user) {
+      return Response.json(
+        { error: 'User not found' }, 
+        { status: 404 }
+      );
+    }
+    
+    // Create a verification token
+    const token = await createVerificationToken(user);
+    
+    // Send the verification email
     await sendVerificationEmail(email, token);
     
     return Response.json({ success: true });

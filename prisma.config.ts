@@ -1,7 +1,8 @@
-import { defineConfig } from '@prisma/client/extension'
+import { defineConfig } from '@prisma/client/runtime/library'
 
 export default defineConfig({
   datasource: {
-    url: process.env.DATABASE_URL!,
+    url: process.env.DATABASE_URL,
+    direct: true,
   },
 })

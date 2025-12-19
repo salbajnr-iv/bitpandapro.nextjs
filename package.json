@@ -10,8 +10,8 @@
     "migrate": "prisma migrate dev --name init"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.1.0",
-    "@prisma/client": "^7.1.0",
+    "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/client": "^7.2.0",
     "@radix-ui/react-slot": "^1.2.4",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.39.8",
@@ -22,6 +22,7 @@
     "next": "^16.0.10",
     "nodemailer": "^7.0.11",
     "pg": "^8.16.3",
+    "prisma": "^7.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^3.4.0",
@@ -35,10 +36,10 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.17",
+    "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.0",
     "postcss": "^8.4.33",
-    "prisma": "^7.1.0",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }

@@ -24,7 +24,6 @@ export default function ForgotPasswordPage() {
         },
         body: JSON.stringify({
           email,
-          token: 'password-reset-token-placeholder', // In a real app, you would generate a proper token
         }),
       });
       

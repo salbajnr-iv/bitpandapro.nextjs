@@ -126,8 +126,6 @@ export function useAuth() {
         
         // Send verification email via API route
         try {
-          // In a real app, you would generate a proper verification token
-          // For now, we'll use a placeholder
           await fetch('/api/email/send-verification', {
             method: 'POST',
             headers: {
@@ -135,7 +133,6 @@ export function useAuth() {
             },
             body: JSON.stringify({
               email,
-              token: 'verification-token-placeholder',
             }),
           });
         } catch (emailError) {

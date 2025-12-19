@@ -2,6 +2,12 @@ import nodemailer from 'nodemailer';
 
 // Send email function using Gmail SMTP with app password
 export async function sendEmail(to: string, subject: string, html: string, text?: string) {
+  // Check if email configuration exists
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    console.warn('Email configuration missing. Skipping email send.');
+    return { messageId: 'skipped', accepted: [], rejected: [] };
+  }
+
   try {
     // Create transporter using Gmail SMTP
     const transporter = nodemailer.createTransport({
@@ -25,9 +31,14 @@ export async function sendEmail(to: string, subject: string, html: string, text?
     const result = await transporter.sendMail(mailOptions);
     console.log('Email sent successfully:', result.messageId);
     return result;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error sending email:', error);
-    throw error;
+    console.error('SMTP Error Details:', {
+      code: error.code,
+      command: error.command,
+      response: error.response,
+    });
+    throw new Error(`Failed to send email: ${error.message}`);
   }
 }
 

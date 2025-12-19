@@ -21,8 +21,7 @@ export default function VerifyEmailPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: 'user@example.com', // In a real app, you would get this from context or params
-          token: 'verification-token-placeholder',
+          email, // In a real app, you would get this from context or params
         }),
       });
       

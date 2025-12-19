@@ -113,7 +113,7 @@ export default function Home() {
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-md">
                 <Image 
-                  src="/herosection.png" 
+                  src="https://a.storyblok.com/f/176646/960x600/6795a4c32d/website_homepage_cryptocurrencies.png" 
                   alt="Man in a gray suit with a striped shirt, sitting and holding a phone, looking to the side, with a green background." 
                   width={500}
                   height={630}

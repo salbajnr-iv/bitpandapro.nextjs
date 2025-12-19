@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.bitpanda.com/en"
   },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
   openGraph: {
     type: "website",
     title: "Bitpanda - Start investing today",
@@ -46,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className}`}>
+    <html lang="en" className={`${inter.className}`} suppressHydrationWarning>
       <body className="antialiased">
         <ThemeProvider>
           {children}
