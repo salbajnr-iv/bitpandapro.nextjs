@@ -17,11 +17,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.bitpanda.com/en"
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
   openGraph: {
     type: "website",
     title: "Bitpanda - Start investing today",
@@ -44,6 +39,14 @@ export const metadata: Metadata = {
     description: "Trade in minutes from only €1. Your No.1 European broker for stocks, crypto, indices, ETFs and precious metals. Trade 24/7. Fee-free on all deposits."
   }
 };
+
+export function generateViewport() {
+  return {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  };
+}
 
 export default function RootLayout({
   children,
