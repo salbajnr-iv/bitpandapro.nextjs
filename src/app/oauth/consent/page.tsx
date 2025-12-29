@@ -11,11 +11,11 @@ function OAuthConsentPageInner() {
   const searchParams = useSearchParams();
 
   // OAuth request parameters
-  const clientId = searchParams.get('client_id');
-  const redirectUri = searchParams.get('redirect_uri');
-  const responseType = searchParams.get('response_type');
-  const scope = searchParams.get('scope');
-  const state = searchParams.get('state');
+  const clientId = searchParams.get("client_id");
+  const redirectUri = searchParams.get("redirect_uri");
+  const responseType = searchParams.get("response_type");
+  const scope = searchParams.get("scope");
+  const state = searchParams.get("state");
 
   const [loading, setLoading] = useState(true);
   const [clientInfo, setClientInfo] = useState<any>(null);
@@ -28,13 +28,14 @@ function OAuthConsentPageInner() {
     setTimeout(() => {
       setClientInfo({
         name: "Sample OAuth Client",
-        description: "This application is requesting access to your Bitpanda Pro account.",
-        website: "https://sample-client.com"
+        description:
+          "This application is requesting access to your Bitpanda Pro account.",
+        website: "https://sample-client.com",
       });
 
       setUserInfo({
         name: "John Doe",
-        email: "john.doe@example.com"
+        email: "john.doe@example.com",
       });
 
       setLoading(false);
@@ -64,12 +65,13 @@ function OAuthConsentPageInner() {
             <div className="flex items-center justify-between h-16">
               <Link href="/" className="flex items-center">
                 <div className="flex items-center space-x-2">
-                  <Image 
-                    src="https://sbcdn.bitpanda.com/300x88/e191121310/website_header-logo-01.svg" 
-                    alt="Bitpanda logo" 
+                  <Image
+                    src="https://sbcdn.bitpanda.com/300x88/e191121310/website_header-logo-01.svg"
+                    alt="Bitpanda logo"
                     width={150}
                     height={44}
-                    className="h-11 w-auto" style={{ width: 'auto', height: 'auto' }}
+                    className="h-11 w-auto"
+                    style={{ width: "auto", height: "auto" }}
                   />
                 </div>
               </Link>
@@ -85,9 +87,7 @@ function OAuthConsentPageInner() {
           <div className="bp-container">
             <div className="max-w-md w-full mx-auto">
               <div className="auth-header">
-                <h1 className="auth-title">
-                  Authorize Application
-                </h1>
+                <h1 className="auth-title">Authorize Application</h1>
                 <p className="auth-subtitle">
                   Loading authorization request...
                 </p>
@@ -108,9 +108,15 @@ function OAuthConsentPageInner() {
             <div className="text-center text-sm text-gray-500">
               <p>© 2024 BITPANDA PRO. All rights reserved.</p>
               <div className="footer-links">
-                <Link href="/terms" className="footer-link">Terms</Link>
-                <Link href="/privacy" className="footer-link">Privacy</Link>
-                <Link href="/security" className="footer-link">Security</Link>
+                <Link href="/terms" className="footer-link">
+                  Terms
+                </Link>
+                <Link href="/privacy" className="footer-link">
+                  Privacy
+                </Link>
+                <Link href="/security" className="footer-link">
+                  Security
+                </Link>
               </div>
             </div>
           </div>
@@ -127,9 +133,9 @@ function OAuthConsentPageInner() {
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center">
               <div className="flex items-center space-x-2">
-                <Image 
-                  src="https://sbcdn.bitpanda.com/300x88/e191121310/website_header-logo-01.svg" 
-                  alt="Bitpanda logo" 
+                <Image
+                  src="https://sbcdn.bitpanda.com/300x88/e191121310/website_header-logo-01.svg"
+                  alt="Bitpanda logo"
                   width={150}
                   height={44}
                   className="h-11 w-auto"
@@ -148,12 +154,8 @@ function OAuthConsentPageInner() {
         <div className="bp-container">
           <div className="max-w-md w-full mx-auto">
             <div className="auth-header">
-              <h1 className="auth-title">
-                Authorize Application
-              </h1>
-              <p className="auth-subtitle">
-                Connect your Bitpanda Pro account
-              </p>
+              <h1 className="auth-title">Authorize Application</h1>
+              <p className="auth-subtitle">Connect your Bitpanda Pro account</p>
             </div>
 
             <div className="auth-form">
@@ -162,51 +164,87 @@ function OAuthConsentPageInner() {
                   {error}
                 </div>
               )}
-              
+
               <div className="mb-6 p-4 bg-blue-50 rounded-lg">
                 <div className="flex items-center mb-3">
                   <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16" />
                   <div className="ml-4">
                     <h2 className="font-bold text-lg">{clientInfo?.name}</h2>
-                    <p className="text-sm text-gray-600">Want to access your account</p>
+                    <p className="text-sm text-gray-600">
+                      Want to access your account
+                    </p>
                   </div>
                 </div>
-                
+
                 <p className="text-sm text-gray-700">
                   {clientInfo?.description}
                 </p>
-                
+
                 <div className="mt-3 text-xs">
-                  <Link href={clientInfo?.website || "#"} className="bp-link" target="_blank">
+                  <Link
+                    href={clientInfo?.website || "#"}
+                    className="bp-link"
+                    target="_blank"
+                  >
                     Visit website
                   </Link>
                 </div>
               </div>
-              
+
               <div className="mb-6 p-4 bg-gray-50 rounded-lg">
                 <h3 className="font-medium mb-2">Permissions requested:</h3>
                 <ul className="text-sm space-y-1">
                   <li className="flex items-start">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg
+                      className="h-5 w-5 text-green-500 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                     <span>View your profile information</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg
+                      className="h-5 w-5 text-green-500 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                     <span>View your portfolio data</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg
+                      className="h-5 w-5 text-green-500 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                     <span>View your trading history</span>
                   </li>
                 </ul>
               </div>
-              
+
               <div className="mb-6 p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center">
                   <div className="bg-gray-200 border-2 border-dashed rounded-xl w-10 h-10" />
@@ -216,7 +254,7 @@ function OAuthConsentPageInner() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={handleDeny}
@@ -231,16 +269,18 @@ function OAuthConsentPageInner() {
                   Authorize
                 </button>
               </div>
-              
+
               <div className="mt-4 text-center text-xs text-gray-500">
                 <p>
-                  By authorizing, you agree to the Bitpanda Pro 
-                  {" "}
-                  <Link href="/terms" className="bp-link">Terms of Service</Link>
-                  {" "}
-                  and 
-                  {" "}
-                  <Link href="/privacy" className="bp-link">Privacy Policy</Link>.
+                  By authorizing, you agree to the Bitpanda Pro{" "}
+                  <Link href="/terms" className="bp-link">
+                    Terms of Service
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/privacy" className="bp-link">
+                    Privacy Policy
+                  </Link>
+                  .
                 </p>
               </div>
             </div>
@@ -254,9 +294,15 @@ function OAuthConsentPageInner() {
           <div className="text-center text-sm text-gray-500">
             <p>© 2024 BITPANDA PRO. All rights reserved.</p>
             <div className="footer-links">
-              <Link href="/terms" className="footer-link">Terms</Link>
-              <Link href="/privacy" className="footer-link">Privacy</Link>
-              <Link href="/security" className="footer-link">Security</Link>
+              <Link href="/terms" className="footer-link">
+                Terms
+              </Link>
+              <Link href="/privacy" className="footer-link">
+                Privacy
+              </Link>
+              <Link href="/security" className="footer-link">
+                Security
+              </Link>
             </div>
           </div>
         </div>
