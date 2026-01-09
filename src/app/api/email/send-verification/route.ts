@@ -14,16 +14,18 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Find the user by email
-    const user = await prisma.user.findUnique({
+    // Find or create the user by email
+    let user = await prisma.user.findUnique({
       where: { email },
     });
     
+    // If user doesn't exist in local database, create them
     if (!user) {
-      return Response.json(
-        { error: 'User not found' }, 
-        { status: 404 }
-      );
+      user = await prisma.user.create({
+        data: {
+          email,
+        },
+      });
     }
     
     // Create a verification token
